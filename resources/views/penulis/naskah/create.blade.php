@@ -42,27 +42,12 @@
                         </div>
 
                         <div class="penulis-create-field">
-                            <label for="kelas">Kelas</label>
-                            <input
-                                id="kelas"
-                                name="kelas"
-                                type="text"
-                                value="{{ old('kelas') }}"
-                                class="penulis-create-control"
-                                required
-                            >
-                            <x-input-error :messages="$errors->get('kelas')" class="mt-2" />
-                            <p class="penulis-create-help">
-                                Kelas harus sesuai dengan jenjang: SD/MI 1-6, SMP/MTS 7-9, SMA/MA/SMK 10-12.
-                            </p>
-                        </div>
-
-                        <div class="penulis-create-field">
                             <label for="bidang_keahlian">Jenjang Naskah</label>
                             <select
                                 id="bidang_keahlian"
                                 name="bidang_keahlian"
                                 class="penulis-create-control"
+                                data-jenjang-select
                                 required
                             >
                                 <option value="">Pilih jenjang naskah</option>
@@ -75,6 +60,21 @@
                                 <option value="SMK" @selected(old('bidang_keahlian') === 'SMK')>SMK</option>
                             </select>
                             <x-input-error :messages="$errors->get('bidang_keahlian')" class="mt-2" />
+                        </div>
+
+                        <div class="penulis-create-field">
+                            <label for="kelas">Kelas</label>
+                            <select
+                                id="kelas"
+                                name="kelas"
+                                class="penulis-create-control"
+                                data-kelas-select
+                                data-selected-kelas="{{ old('kelas') }}"
+                                required
+                            >
+                                <option value="">Pilih jenjang naskah terlebih dahulu</option>
+                            </select>
+                            <x-input-error :messages="$errors->get('kelas')" class="mt-2" />
                         </div>
 
                         <div class="penulis-create-inline-grid">

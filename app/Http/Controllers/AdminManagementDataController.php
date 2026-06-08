@@ -284,7 +284,12 @@ class AdminManagementDataController extends Controller
         $editor = Editor::query()->where('id_editor', $id)->firstOrFail();
 
         $validated = $request->validate([
-            'nama_lengkap' => ['required', 'string', 'max:255'],
+            'nama_lengkap' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique(User::class, 'username')->ignore($editor->id_user, 'id_user'),
+            ],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$editor->id_user.',id_user'],
             'no_hp' => ['nullable', 'string', 'max:255'],
             'mata_pelajaran' => ['required', 'string', 'max:255'],
@@ -293,6 +298,7 @@ class AdminManagementDataController extends Controller
 
         DB::transaction(function () use ($editor, $validated): void {
             User::query()->where('id_user', $editor->id_user)->update([
+                'username' => $validated['nama_lengkap'],
                 'email' => $validated['email'],
             ]);
 
@@ -317,7 +323,12 @@ class AdminManagementDataController extends Controller
         $layouter = Layouter::query()->where('id_layouter', $id)->firstOrFail();
 
         $validated = $request->validate([
-            'nama_lengkap' => ['required', 'string', 'max:255'],
+            'nama_lengkap' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique(User::class, 'username')->ignore($layouter->id_user, 'id_user'),
+            ],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$layouter->id_user.',id_user'],
             'no_hp' => ['nullable', 'string', 'max:255'],
             'mata_pelajaran' => ['required', 'string', 'max:255'],
@@ -326,6 +337,7 @@ class AdminManagementDataController extends Controller
 
         DB::transaction(function () use ($layouter, $validated): void {
             User::query()->where('id_user', $layouter->id_user)->update([
+                'username' => $validated['nama_lengkap'],
                 'email' => $validated['email'],
             ]);
 

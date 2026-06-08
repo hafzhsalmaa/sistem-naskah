@@ -245,6 +245,121 @@
     line-height: 1rem;
 }
 
+.role-account-dropdown {
+    position: relative;
+}
+
+.role-account-trigger {
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.role-account-trigger:hover,
+.role-account-trigger:focus {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+    outline: none;
+}
+
+.account-user-info {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.0625rem;
+    min-width: 0;
+    padding-right: 0.5rem;
+    text-align: left;
+}
+
+.account-user-name,
+.account-user-role {
+    display: block;
+    max-width: 9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.account-user-name {
+    color: #094067;
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1rem;
+}
+
+.account-user-role {
+    color: #64748b;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 0.95rem;
+}
+
+.role-account-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 55;
+    width: min(14rem, calc(100vw - 1.5rem));
+    margin-top: 0.75rem;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    background: #ffffff;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
+}
+
+.role-account-head {
+    border-bottom: 1px solid #f1f5f9;
+    padding: 0.875rem 1rem;
+}
+
+.role-account-name {
+    color: #0f172a;
+    font-size: 0.875rem;
+    font-weight: 800;
+    line-height: 1.25rem;
+}
+
+.role-account-role {
+    margin-top: 0.125rem;
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.role-account-list {
+    padding: 0.35rem;
+}
+
+.role-account-item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.75rem;
+    color: #334155;
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.role-account-item:hover,
+.role-account-item:focus {
+    background: #f8fafc;
+    color: #0f172a;
+    outline: none;
+}
+
+.role-account-item--button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
 .role-notification {
     position: relative;
 }
@@ -838,6 +953,10 @@
 
     .role-topbar-user-text {
         display: block;
+    }
+
+    .account-user-info {
+        display: flex;
     }
 
     .app-nav__container {

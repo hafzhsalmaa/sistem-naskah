@@ -1,4 +1,64 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-jenjang-select]').forEach((jenjangSelect) => {
+        const form = jenjangSelect.closest('form');
+        const kelasSelect = form?.querySelector('[data-kelas-select]');
+
+        if (!kelasSelect) {
+            return;
+        }
+
+        const kelasByJenjang = {
+            SD: ['1', '2', '3', '4', '5', '6'],
+            MI: ['1', '2', '3', '4', '5', '6'],
+            SMP: ['7', '8', '9'],
+            MTS: ['7', '8', '9'],
+            SMA: ['10', '11', '12'],
+            MA: ['10', '11', '12'],
+            SMK: ['10', '11', '12'],
+        };
+
+        const appendOption = (value, label) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = label;
+            kelasSelect.appendChild(option);
+
+            return option;
+        };
+
+        const renderKelasOptions = () => {
+            const jenjang = jenjangSelect.value;
+            const kelasOptions = kelasByJenjang[jenjang] || [];
+            const selectedKelas = kelasSelect.dataset.selectedKelas || '';
+
+            kelasSelect.innerHTML = '';
+
+            if (!kelasOptions.length) {
+                appendOption('', 'Pilih jenjang naskah terlebih dahulu');
+                kelasSelect.disabled = true;
+                return;
+            }
+
+            appendOption('', 'Pilih kelas');
+            kelasOptions.forEach((kelas) => {
+                const option = appendOption(kelas, kelas);
+
+                if (kelas === selectedKelas) {
+                    option.selected = true;
+                }
+            });
+
+            kelasSelect.disabled = false;
+        };
+
+        jenjangSelect.addEventListener('change', () => {
+            kelasSelect.dataset.selectedKelas = '';
+            renderKelasOptions();
+        });
+
+        renderKelasOptions();
+    });
+
     document.querySelectorAll('.penulis-donut-chart').forEach((chart) => {
         const values = (chart.dataset.values || '')
             .split(',')

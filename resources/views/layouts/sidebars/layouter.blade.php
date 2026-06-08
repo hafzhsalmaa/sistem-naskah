@@ -9,7 +9,7 @@
         ->implode('');
 @endphp
 
-<div x-data="{ layouterSidebarOpen: false, layouterNotificationOpen: false }">
+<div x-data="{ layouterSidebarOpen: false, layouterNotificationOpen: false, layouterAccountOpen: false }">
     <div x-show="layouterSidebarOpen" x-cloak class="layouter-sidebar-backdrop role-sidebar-backdrop"
         @click="layouterSidebarOpen = false"></div>
 
@@ -194,15 +194,13 @@
                     </div>
                 </div>
 
-                <div class="role-topbar-user">
-                    <div class="role-topbar-avatar">
-                        {{ $sidebarInitials }}
-                    </div>
-                    <div class="role-topbar-user-text">
-                        <p class="role-topbar-user-name">{{ $layouterDisplayName }}</p>
-                        <p class="role-topbar-user-role">Layouter</p>
-                    </div>
-                </div>
+                <x-role-account-dropdown
+                    :display-name="$layouterDisplayName"
+                    :initials="$sidebarInitials"
+                    role-label="Layouter"
+                    open-state="layouterAccountOpen"
+                    :settings-route="route('layouter.pengaturan.index')"
+                />
             </div>
         </div>
     </header>

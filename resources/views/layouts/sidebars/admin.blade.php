@@ -9,7 +9,7 @@
 @endphp
 
 <div
-    x-data="{ adminSidebarOpen: false, adminManageOpen: {{ request()->routeIs('admin.data-*') || request()->routeIs('admin.naskah.*') ? 'true' : 'false' }}, adminNotificationOpen: false }">
+    x-data="{ adminSidebarOpen: false, adminManageOpen: {{ request()->routeIs('admin.data-*') || request()->routeIs('admin.naskah.*') ? 'true' : 'false' }}, adminNotificationOpen: false, adminAccountOpen: false }">
     <div x-show="adminSidebarOpen" x-cloak class="admin-sidebar-backdrop role-sidebar-backdrop"
         @click="adminSidebarOpen = false"></div>
 
@@ -222,15 +222,12 @@
                     </div>
                 </div>
 
-                <div class="role-topbar-user">
-                    <div class="role-topbar-avatar">
-                        {{ $sidebarInitials }}
-                    </div>
-                    <div class="role-topbar-user-text">
-                        <p class="role-topbar-user-name">{{ $adminUser->username }}</p>
-                        <p class="role-topbar-user-role">Admin</p>
-                    </div>
-                </div>
+                <x-role-account-dropdown
+                    :display-name="$adminUser->username"
+                    :initials="$sidebarInitials"
+                    role-label="Admin"
+                    open-state="adminAccountOpen"
+                />
             </div>
         </div>
     </header>

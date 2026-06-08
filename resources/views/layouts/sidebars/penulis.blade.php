@@ -10,7 +10,7 @@
 @endphp
 
 <div
-    x-data="{ penulisSidebarOpen: false, penulisNotificationOpen: false }">
+    x-data="{ penulisSidebarOpen: false, penulisNotificationOpen: false, penulisAccountOpen: false }">
     <div x-show="penulisSidebarOpen" x-cloak class="penulis-sidebar-backdrop role-sidebar-backdrop"
         @click="penulisSidebarOpen = false"></div>
 
@@ -213,15 +213,12 @@
                     </div>
                 </div>
 
-                <div class="role-topbar-user">
-                    <div class="role-topbar-avatar">
-                        {{ $sidebarInitials }}
-                    </div>
-                    <div class="role-topbar-user-text">
-                        <p class="role-topbar-user-name">{{ $penulisDisplayName }}</p>
-                        <p class="role-topbar-user-role">Penulis</p>
-                    </div>
-                </div>
+                <x-role-account-dropdown
+                    :display-name="$penulisDisplayName"
+                    :initials="$sidebarInitials"
+                    role-label="Penulis"
+                    open-state="penulisAccountOpen"
+                />
             </div>
         </div>
     </header>

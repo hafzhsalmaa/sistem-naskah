@@ -9,7 +9,7 @@
         ->implode('');
 @endphp
 
-<div x-data="{ editorSidebarOpen: false, editorNotificationOpen: false }">
+<div x-data="{ editorSidebarOpen: false, editorNotificationOpen: false, editorAccountOpen: false }">
     <div x-show="editorSidebarOpen" x-cloak class="editor-sidebar-backdrop role-sidebar-backdrop"
         @click="editorSidebarOpen = false"></div>
 
@@ -195,15 +195,13 @@
                     </div>
                 </div>
 
-                <div class="role-topbar-user">
-                    <div class="role-topbar-avatar">
-                        {{ $sidebarInitials }}
-                    </div>
-                    <div class="role-topbar-user-text">
-                        <p class="role-topbar-user-name">{{ $editorDisplayName }}</p>
-                        <p class="role-topbar-user-role">Editor</p>
-                    </div>
-                </div>
+                <x-role-account-dropdown
+                    :display-name="$editorDisplayName"
+                    :initials="$sidebarInitials"
+                    role-label="Editor"
+                    open-state="editorAccountOpen"
+                    :settings-route="route('editor.pengaturan.index')"
+                />
             </div>
         </div>
     </header>
