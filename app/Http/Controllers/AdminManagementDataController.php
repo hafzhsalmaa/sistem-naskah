@@ -292,7 +292,23 @@ class AdminManagementDataController extends Controller
             ],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$editor->id_user.',id_user'],
             'no_hp' => ['nullable', 'string', 'max:255'],
-            'mata_pelajaran' => ['required', 'string', 'max:255'],
+            'kategori_mapel' => ['required', 'string', Rule::in(['Umum', 'Bahasa', 'Agama'])],
+            'mata_pelajaran' => ['required', 'string', Rule::in([
+                'Matematika',
+                'IPA',
+                'IPS',
+                'Sejarah',
+                'PPKn',
+                'TIK',
+                'Bahasa Indonesia',
+                'Bahasa Inggris',
+                'Bahasa Jawa',
+                'Bahasa Arab',
+                'Fikih',
+                'Akidah Akhlak',
+                "Al-Qur'an Hadis",
+                'Sejarah Kebudayaan Islam',
+            ])],
             'bidang_keahlian' => ['required', 'string', Rule::in(['SD/MI', 'SMP/MTS', 'SMA/MA/SMK'])],
         ]);
 
@@ -305,6 +321,7 @@ class AdminManagementDataController extends Controller
             $editor->update([
                 'nama_lengkap' => $validated['nama_lengkap'],
                 'no_hp' => $validated['no_hp'],
+                'kategori_mapel' => $validated['kategori_mapel'],
                 'mata_pelajaran' => $validated['mata_pelajaran'],
                 'bidang_keahlian' => $validated['bidang_keahlian'],
                 'kode_editor' => Editor::generateKodeEditor(
@@ -331,7 +348,23 @@ class AdminManagementDataController extends Controller
             ],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$layouter->id_user.',id_user'],
             'no_hp' => ['nullable', 'string', 'max:255'],
-            'mata_pelajaran' => ['required', 'string', 'max:255'],
+            'kategori_mapel' => ['required', 'string', Rule::in(['Umum', 'Bahasa', 'Agama'])],
+            'mata_pelajaran' => ['required', 'string', Rule::in([
+                'Matematika',
+                'IPA',
+                'IPS',
+                'Sejarah',
+                'PPKn',
+                'TIK',
+                'Bahasa Indonesia',
+                'Bahasa Inggris',
+                'Bahasa Jawa',
+                'Bahasa Arab',
+                'Fikih',
+                'Akidah Akhlak',
+                "Al-Qur'an Hadis",
+                'Sejarah Kebudayaan Islam',
+            ])],
             'bidang_keahlian' => ['required', 'string', Rule::in(['SD/MI', 'SMP/MTS', 'SMA/MA/SMK'])],
         ]);
 
@@ -344,6 +377,7 @@ class AdminManagementDataController extends Controller
             $layouter->update([
                 'nama_lengkap' => $validated['nama_lengkap'],
                 'no_hp' => $validated['no_hp'],
+                'kategori_mapel' => $validated['kategori_mapel'],
                 'mata_pelajaran' => $validated['mata_pelajaran'],
                 'bidang_keahlian' => $validated['bidang_keahlian'],
                 'kode_layouter' => Layouter::generateKodeLayouter(

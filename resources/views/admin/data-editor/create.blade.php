@@ -92,7 +92,7 @@
 
                         <div class="admin-form-group">
                             <label for="kategori_mapel" class="admin-form-label">Kategori Mapel</label>
-                            <select id="kategori_mapel" name="kategori_mapel" class="admin-form-select" required>
+                            <select id="kategori_mapel" name="kategori_mapel" class="admin-form-select" data-mapel-category-select required>
                                 <option value="">Pilih kategori mapel</option>
                                 <option value="Umum" @selected(old('kategori_mapel') === 'Umum')>Umum</option>
                                 <option value="Bahasa" @selected(old('kategori_mapel') === 'Bahasa')>Bahasa</option>
@@ -105,16 +105,8 @@
 
                         <div class="admin-form-group">
                             <label for="mata_pelajaran" class="admin-form-label">Mata Pelajaran</label>
-                            <select id="mata_pelajaran" name="mata_pelajaran" class="admin-form-select" required>
-                                <option value="">Pilih mata pelajaran</option>
-                                <option value="IPA" @selected(old('mata_pelajaran') === 'IPA')>IPA</option>
-                                <option value="IPS" @selected(old('mata_pelajaran') === 'IPS')>IPS</option>
-                                <option value="Matematika" @selected(old('mata_pelajaran') === 'Matematika')>Matematika</option>
-                                <option value="Bahasa Indonesia" @selected(old('mata_pelajaran') === 'Bahasa Indonesia')>Bahasa Indonesia</option>
-                                <option value="Bahasa Inggris" @selected(old('mata_pelajaran') === 'Bahasa Inggris')>Bahasa Inggris</option>
-                                <option value="Sejarah" @selected(old('mata_pelajaran') === 'Sejarah')>Sejarah</option>
-                                <option value="Agama" @selected(old('mata_pelajaran') === 'Agama')>Agama</option>
-                                <option value="Bahasa Jawa" @selected(old('mata_pelajaran') === 'Bahasa Jawa')>Bahasa Jawa</option>
+                            <select id="mata_pelajaran" name="mata_pelajaran" class="admin-form-select" data-mapel-select data-selected-mapel="{{ old('mata_pelajaran') }}" required>
+                                <option value="">Pilih kategori mapel terlebih dahulu</option>
                             </select>
                             @error('mata_pelajaran')
                                 <p class="admin-form-error">{{ $message }}</p>

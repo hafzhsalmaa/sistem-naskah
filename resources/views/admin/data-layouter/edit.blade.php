@@ -54,14 +54,6 @@
                         </div>
 
                         <div class="admin-form-group">
-                            <label for="mata_pelajaran" class="admin-form-label">Bidang Mata Pelajaran</label>
-                            <input id="mata_pelajaran" name="mata_pelajaran" type="text" value="{{ old('mata_pelajaran', $layouter->mata_pelajaran) }}" class="admin-form-input" required>
-                            @error('mata_pelajaran')
-                                <p class="admin-form-error">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="admin-form-group">
                             <label for="bidang_keahlian" class="admin-form-label">Bidang Keahlian</label>
                             <select id="bidang_keahlian" name="bidang_keahlian" class="admin-form-select" required>
                                 <option value="">Pilih bidang keahlian</option>
@@ -70,6 +62,29 @@
                                 <option value="SMA/MA/SMK" @selected(old('bidang_keahlian', $layouter->bidang_keahlian) === 'SMA/MA/SMK')>SMA/MA/SMK</option>
                             </select>
                             @error('bidang_keahlian')
+                                <p class="admin-form-error">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="admin-form-group">
+                            <label for="kategori_mapel" class="admin-form-label">Kategori Mapel</label>
+                            <select id="kategori_mapel" name="kategori_mapel" class="admin-form-select" data-mapel-category-select required>
+                                <option value="">Pilih kategori mapel</option>
+                                <option value="Umum" @selected(old('kategori_mapel', $layouter->kategori_mapel) === 'Umum')>Umum</option>
+                                <option value="Bahasa" @selected(old('kategori_mapel', $layouter->kategori_mapel) === 'Bahasa')>Bahasa</option>
+                                <option value="Agama" @selected(old('kategori_mapel', $layouter->kategori_mapel) === 'Agama')>Agama</option>
+                            </select>
+                            @error('kategori_mapel')
+                                <p class="admin-form-error">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="admin-form-group">
+                            <label for="mata_pelajaran" class="admin-form-label">Mata Pelajaran</label>
+                            <select id="mata_pelajaran" name="mata_pelajaran" class="admin-form-select" data-mapel-select data-selected-mapel="{{ old('mata_pelajaran', $layouter->mata_pelajaran) }}" required>
+                                <option value="">Pilih kategori mapel terlebih dahulu</option>
+                            </select>
+                            @error('mata_pelajaran')
                                 <p class="admin-form-error">{{ $message }}</p>
                             @enderror
                         </div>

@@ -96,11 +96,12 @@
                             <div class="penulis-create-field">
                                 <label for="kategori_mapel">Kategori Mapel</label>
                                 <select
-                                    id="kategori_mapel"
-                                    name="kategori_mapel"
-                                    class="penulis-create-control"
-                                    required
-                                >
+                                id="kategori_mapel"
+                                name="kategori_mapel"
+                                class="penulis-create-control"
+                                data-mapel-category-select
+                                required
+                            >
                                     <option value="">Pilih kategori mapel</option>
                                     <option value="Umum" @selected(old('kategori_mapel') === 'Umum')>Umum</option>
                                     <option value="Bahasa" @selected(old('kategori_mapel') === 'Bahasa')>Bahasa</option>
@@ -116,16 +117,11 @@
                                 id="mata_pelajaran"
                                 name="mata_pelajaran"
                                 class="penulis-create-control"
+                                data-mapel-select
+                                data-selected-mapel="{{ old('mata_pelajaran') }}"
+                                required
                             >
-                                <option value="">Pilih mata pelajaran</option>
-                                <option value="IPA" @selected(old('mata_pelajaran') === 'IPA')>IPA</option>
-                                <option value="IPS" @selected(old('mata_pelajaran') === 'IPS')>IPS</option>
-                                <option value="Matematika" @selected(old('mata_pelajaran') === 'Matematika')>Matematika</option>
-                                <option value="Bahasa Indonesia" @selected(old('mata_pelajaran') === 'Bahasa Indonesia')>Bahasa Indonesia</option>
-                                <option value="Bahasa Inggris" @selected(old('mata_pelajaran') === 'Bahasa Inggris')>Bahasa Inggris</option>
-                                <option value="Sejarah" @selected(old('mata_pelajaran') === 'Sejarah')>Sejarah</option>
-                                <option value="Agama" @selected(old('mata_pelajaran') === 'Agama')>Agama</option>
-                                <option value="Bahasa Jawa" @selected(old('mata_pelajaran') === 'Bahasa Jawa')>Bahasa Jawa</option>
+                                <option value="">Pilih kategori mapel terlebih dahulu</option>
                             </select>
                             <x-input-error :messages="$errors->get('mata_pelajaran')" class="mt-2" />
                         </div>

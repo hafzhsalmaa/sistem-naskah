@@ -1,4 +1,60 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const mapelByKategori = {
+        Umum: ['Matematika', 'IPA', 'IPS', 'Sejarah', 'PPKn', 'TIK'],
+        Bahasa: ['Bahasa Indonesia', 'Bahasa Inggris', 'Bahasa Jawa', 'Bahasa Arab'],
+        Agama: ['Fikih', 'Akidah Akhlak', "Al-Qur'an Hadis", 'Sejarah Kebudayaan Islam'],
+    };
+
+    document.querySelectorAll('[data-mapel-category-select]').forEach((kategoriSelect) => {
+        const form = kategoriSelect.closest('form');
+        const mapelSelect = form?.querySelector('[data-mapel-select]');
+
+        if (!mapelSelect) {
+            return;
+        }
+
+        const appendOption = (value, label) => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = label;
+            mapelSelect.appendChild(option);
+
+            return option;
+        };
+
+        const renderMapelOptions = () => {
+            const kategori = kategoriSelect.value;
+            const mapelOptions = mapelByKategori[kategori] || [];
+            const selectedMapel = mapelSelect.dataset.selectedMapel || '';
+
+            mapelSelect.innerHTML = '';
+
+            if (!mapelOptions.length) {
+                appendOption('', 'Pilih kategori mapel terlebih dahulu');
+                mapelSelect.disabled = true;
+                return;
+            }
+
+            appendOption('', 'Pilih mata pelajaran');
+            mapelOptions.forEach((mapel) => {
+                const option = appendOption(mapel, mapel);
+
+                if (mapel === selectedMapel) {
+                    option.selected = true;
+                }
+            });
+
+            mapelSelect.disabled = false;
+        };
+
+        kategoriSelect.addEventListener('change', () => {
+            mapelSelect.dataset.selectedMapel = '';
+            renderMapelOptions();
+        });
+
+        renderMapelOptions();
+    });
+
     const initAdminTableSelection = (tableSection, getSelectableRows) => {
         const selectAllInput = tableSection.querySelector('[data-admin-select-all]');
         const rowCheckboxes = Array.from(tableSection.querySelectorAll('[data-admin-row-checkbox]'));
