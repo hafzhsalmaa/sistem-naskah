@@ -123,6 +123,10 @@
     transform: translateX(-100%);
 }
 
+.role-sidebar-panel.translate-x-0 {
+    transform: translateX(0);
+}
+
 .role-sidebar-scroll {
     padding: 1.25rem 1rem;
 }
@@ -965,6 +969,37 @@
 
     .app-nav-user-trigger__copy {
         display: block;
+    }
+}
+
+@media (max-width: 639.98px) {
+    .role-notification-panel {
+        position: fixed;
+        top: 4.5rem;
+        right: 0.75rem;
+        left: 0.75rem;
+        width: auto;
+        max-width: calc(100vw - 1.5rem);
+        max-height: calc(100vh - 5.5rem);
+        margin-top: 0;
+        overflow-x: hidden;
+    }
+
+    .role-notification-list {
+        max-height: min(24rem, calc(100vh - 12rem));
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .role-notification-head,
+    .role-notification-item,
+    .role-notification-foot {
+        min-width: 0;
+    }
+
+    .role-notification-message,
+    .role-notification-item-title {
+        overflow-wrap: anywhere;
     }
 }
 
