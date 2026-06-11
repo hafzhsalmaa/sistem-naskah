@@ -10,7 +10,8 @@
 @endphp
 
 <div
-    x-data="{ penulisSidebarOpen: false, penulisNotificationOpen: false, penulisAccountOpen: false }">
+    x-data="{ penulisSidebarOpen: false, notificationOpen: false, accountOpen: false }"
+    @keydown.escape.window="notificationOpen = false; accountOpen = false">
     <div x-show="penulisSidebarOpen" x-cloak class="penulis-sidebar-backdrop role-sidebar-backdrop"
         @click="penulisSidebarOpen = false"></div>
 
@@ -132,10 +133,10 @@
             </div>
 
             <div class="role-topbar-actions">
-                <div class="role-notification" @click.outside="penulisNotificationOpen = false">
+                <div class="role-notification" @click.outside="notificationOpen = false; accountOpen = false">
                     <button
                         type="button"
-                        @click.stop="penulisNotificationOpen = !penulisNotificationOpen"
+                        @click.stop="notificationOpen = !notificationOpen; accountOpen = false"
                         class="role-notification-button"
                         aria-label="Buka notifikasi"
                     >
@@ -149,7 +150,7 @@
                     </button>
 
                     <div
-                        x-show="penulisNotificationOpen"
+                        x-show="notificationOpen"
                         x-cloak
                         @click.stop
                         class="role-notification-panel"
@@ -217,7 +218,8 @@
                     :display-name="$penulisDisplayName"
                     :initials="$sidebarInitials"
                     role-label="Penulis"
-                    open-state="penulisAccountOpen"
+                    open-state="accountOpen"
+                    close-state="notificationOpen"
                 />
             </div>
         </div>

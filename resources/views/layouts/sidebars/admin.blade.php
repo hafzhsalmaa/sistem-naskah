@@ -9,7 +9,8 @@
 @endphp
 
 <div
-    x-data="{ adminSidebarOpen: false, adminManageOpen: {{ request()->routeIs('admin.data-*') || request()->routeIs('admin.naskah.*') ? 'true' : 'false' }}, adminNotificationOpen: false, adminAccountOpen: false }">
+    x-data="{ adminSidebarOpen: false, adminManageOpen: {{ request()->routeIs('admin.data-*') || request()->routeIs('admin.naskah.*') ? 'true' : 'false' }}, notificationOpen: false, accountOpen: false }"
+    @keydown.escape.window="notificationOpen = false; accountOpen = false">
     <div x-show="adminSidebarOpen" x-cloak class="admin-sidebar-backdrop role-sidebar-backdrop"
         @click="adminSidebarOpen = false"></div>
 
@@ -141,10 +142,10 @@
             </div>
 
             <div class="role-topbar-actions">
-                <div class="role-notification" @click.outside="adminNotificationOpen = false">
+                <div class="role-notification" @click.outside="notificationOpen = false; accountOpen = false">
                     <button
                         type="button"
-                        @click.stop="adminNotificationOpen = !adminNotificationOpen"
+                        @click.stop="notificationOpen = !notificationOpen; accountOpen = false"
                         class="role-notification-button"
                         aria-label="Buka notifikasi"
                     >
@@ -158,7 +159,7 @@
                     </button>
 
                     <div
-                        x-show="adminNotificationOpen"
+                        x-show="notificationOpen"
                         x-cloak
                         @click.stop
                         class="role-notification-panel"
@@ -226,7 +227,8 @@
                     :display-name="$adminUser->username"
                     :initials="$sidebarInitials"
                     role-label="Admin"
-                    open-state="adminAccountOpen"
+                    open-state="accountOpen"
+                    close-state="notificationOpen"
                 />
             </div>
         </div>

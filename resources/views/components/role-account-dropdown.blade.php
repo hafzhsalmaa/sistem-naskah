@@ -3,14 +3,19 @@
     'initials',
     'roleLabel',
     'openState',
+    'closeState' => null,
     'settingsRoute' => null,
 ])
 
-<div class="role-account-dropdown" @click.outside="{{ $openState }} = false">
+@php
+    $closeExpression = $closeState ? "; {$closeState} = false" : '';
+@endphp
+
+<div class="role-account-dropdown" @click.outside="{{ $openState }} = false{{ $closeExpression }}">
     <button
         type="button"
         class="role-topbar-user role-account-trigger"
-        @click.stop="{{ $openState }} = !{{ $openState }}"
+        @click.stop="{{ $openState }} = !{{ $openState }}{{ $closeExpression }}"
         :aria-expanded="{{ $openState }}.toString()"
         aria-haspopup="menu"
     >

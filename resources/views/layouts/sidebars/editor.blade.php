@@ -9,7 +9,9 @@
         ->implode('');
 @endphp
 
-<div x-data="{ editorSidebarOpen: false, editorNotificationOpen: false, editorAccountOpen: false }">
+<div
+    x-data="{ editorSidebarOpen: false, notificationOpen: false, accountOpen: false }"
+    @keydown.escape.window="notificationOpen = false; accountOpen = false">
     <div x-show="editorSidebarOpen" x-cloak class="editor-sidebar-backdrop role-sidebar-backdrop"
         @click="editorSidebarOpen = false"></div>
 
@@ -114,10 +116,10 @@
             </div>
 
             <div class="role-topbar-actions">
-                <div class="role-notification" @click.outside="editorNotificationOpen = false">
+                <div class="role-notification" @click.outside="notificationOpen = false; accountOpen = false">
                     <button
                         type="button"
-                        @click.stop="editorNotificationOpen = !editorNotificationOpen"
+                        @click.stop="notificationOpen = !notificationOpen; accountOpen = false"
                         class="role-notification-button"
                         aria-label="Buka notifikasi"
                     >
@@ -131,7 +133,7 @@
                     </button>
 
                     <div
-                        x-show="editorNotificationOpen"
+                        x-show="notificationOpen"
                         x-cloak
                         @click.stop
                         class="role-notification-panel"
@@ -199,7 +201,8 @@
                     :display-name="$editorDisplayName"
                     :initials="$sidebarInitials"
                     role-label="Editor"
-                    open-state="editorAccountOpen"
+                    open-state="accountOpen"
+                    close-state="notificationOpen"
                     :settings-route="route('editor.pengaturan.index')"
                 />
             </div>

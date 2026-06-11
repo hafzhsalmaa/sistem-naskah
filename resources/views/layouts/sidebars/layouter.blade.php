@@ -9,7 +9,9 @@
         ->implode('');
 @endphp
 
-<div x-data="{ layouterSidebarOpen: false, layouterNotificationOpen: false, layouterAccountOpen: false }">
+<div
+    x-data="{ layouterSidebarOpen: false, notificationOpen: false, accountOpen: false }"
+    @keydown.escape.window="notificationOpen = false; accountOpen = false">
     <div x-show="layouterSidebarOpen" x-cloak class="layouter-sidebar-backdrop role-sidebar-backdrop"
         @click="layouterSidebarOpen = false"></div>
 
@@ -113,10 +115,10 @@
             </div>
 
             <div class="role-topbar-actions">
-                <div class="role-notification" @click.outside="layouterNotificationOpen = false">
+                <div class="role-notification" @click.outside="notificationOpen = false; accountOpen = false">
                     <button
                         type="button"
-                        @click.stop="layouterNotificationOpen = !layouterNotificationOpen"
+                        @click.stop="notificationOpen = !notificationOpen; accountOpen = false"
                         class="role-notification-button"
                         aria-label="Buka notifikasi"
                     >
@@ -130,7 +132,7 @@
                     </button>
 
                     <div
-                        x-show="layouterNotificationOpen"
+                        x-show="notificationOpen"
                         x-cloak
                         @click.stop
                         class="role-notification-panel"
@@ -198,7 +200,8 @@
                     :display-name="$layouterDisplayName"
                     :initials="$sidebarInitials"
                     role-label="Layouter"
-                    open-state="layouterAccountOpen"
+                    open-state="accountOpen"
+                    close-state="notificationOpen"
                     :settings-route="route('layouter.pengaturan.index')"
                 />
             </div>
