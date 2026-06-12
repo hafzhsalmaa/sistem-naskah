@@ -621,7 +621,9 @@ class NaskahController extends Controller
             ->where('id_naskah', $naskah->getKey())
             ->firstOrFail();
 
-        return Storage::download($versi->file_path);
+        $downloadName = $versi->nama_file_asli ?: basename($versi->file_path);
+
+        return Storage::download($versi->file_path, $downloadName);
     }
 
     public function previewLayout(Request $request, int $id, int $layoutId): BinaryFileResponse
@@ -661,7 +663,9 @@ class NaskahController extends Controller
             ->where('id_naskah', $naskah->getKey())
             ->firstOrFail();
 
-        return Storage::download($layout->file_layout);
+        $downloadName = $layout->nama_file_layout_asli ?: basename($layout->file_layout);
+
+        return Storage::download($layout->file_layout, $downloadName);
     }
 
     public function downloadReviewAttachment(Request $request, int $id, int $revisiId): StreamedResponse

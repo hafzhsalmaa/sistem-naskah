@@ -363,7 +363,9 @@ class RiwayatNaskahController extends Controller
                 ->where('id_naskah', $idNaskah)
                 ->firstOrFail();
 
-            return Storage::download($versi->file_path);
+            $downloadName = $versi->nama_file_asli ?: basename($versi->file_path);
+
+            return Storage::download($versi->file_path, $downloadName);
         }
 
         if ($source === 'review_attachment') {
@@ -401,7 +403,9 @@ class RiwayatNaskahController extends Controller
             ->where('id_naskah', $idNaskah)
             ->firstOrFail();
 
-        return Storage::download($layout->file_layout);
+        $downloadName = $layout->nama_file_layout_asli ?: basename($layout->file_layout);
+
+        return Storage::download($layout->file_layout, $downloadName);
     }
 
     private function previewHistoryFile(Request $request, int $idNaskah): BinaryFileResponse

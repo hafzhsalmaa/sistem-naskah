@@ -147,7 +147,9 @@ class LayouterNaskahController extends Controller
                 ->where('id_naskah', $naskah->id_naskah)
                 ->firstOrFail();
 
-            return Storage::download($versi->file_path);
+            $downloadName = $versi->nama_file_asli ?: basename($versi->file_path);
+
+            return Storage::download($versi->file_path, $downloadName);
         }
 
         if ($source === 'layout') {

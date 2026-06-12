@@ -257,10 +257,12 @@ class AdminJadwalPenerbitanController extends Controller
                     ->orWhereNotNull('jadwal_penerbitan.id_jadwal');
             })
             ->orderByDesc('layout.id_layout')
-            ->select('layout.file_layout')
+            ->select('layout.file_layout', 'layout.nama_file_layout_asli')
             ->firstOrFail();
 
-        return Storage::download($layout->file_layout);
+        $downloadName = $layout->nama_file_layout_asli ?: basename($layout->file_layout);
+
+        return Storage::download($layout->file_layout, $downloadName);
     }
 
     public function preview(int $id): BinaryFileResponse

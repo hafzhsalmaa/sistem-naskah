@@ -347,12 +347,16 @@ class EditorNaskahController extends Controller
                 ->where('id_naskah', $naskah->id_naskah)
                 ->firstOrFail();
 
-            return Storage::download($versi->file_path);
+            $downloadName = $versi->nama_file_asli ?: basename($versi->file_path);
+
+            return Storage::download($versi->file_path, $downloadName);
         }
 
         abort_unless($naskah->file_path, 404);
 
-        return Storage::download($naskah->file_path);
+        $downloadName = $naskah->nama_file_asli ?: basename($naskah->file_path);
+
+        return Storage::download($naskah->file_path, $downloadName);
     }
 
     public function uploadFileFinal(Request $request, int $id): RedirectResponse
