@@ -297,7 +297,7 @@ class LayouterNaskahController extends Controller
             $admin->notify(new WorkflowNotification(
                 'Layout naskah telah selesai.',
                 'Layouter telah mengunggah hasil layout untuk naskah "'.$naskah->judul.'".',
-                route('admin.naskah.index')
+                route('admin.naskah.index', [], false)
             ));
         });
 
@@ -305,7 +305,7 @@ class LayouterNaskahController extends Controller
             $penulisUser->notify(new WorkflowNotification(
                 'Layout naskah telah selesai.',
                 'Hasil layout untuk naskah "'.$naskah->judul.'" telah diunggah.',
-                route('penulis.naskah.show', $naskah->id_naskah)
+                route('penulis.naskah.show', $naskah->id_naskah, false)
             ));
         }
 

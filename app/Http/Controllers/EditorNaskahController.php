@@ -207,7 +207,7 @@ class EditorNaskahController extends Controller
             $penulisUser->notify(new WorkflowNotification(
                 'Naskah memerlukan revisi.',
                 'Editor memberikan catatan revisi untuk naskah "'.$naskah->judul.'".',
-                route('penulis.naskah.show', $naskah->id_naskah)
+                route('penulis.naskah.show', $naskah->id_naskah, false)
             ));
 
             try {
@@ -250,7 +250,7 @@ class EditorNaskahController extends Controller
             $penulisUser->notify(new WorkflowNotification(
                 'Naskah telah diterima editor.',
                 'Editor telah menerima naskah "'.$naskah->judul.'".',
-                route('penulis.naskah.show', $naskah->id_naskah)
+                route('penulis.naskah.show', $naskah->id_naskah, false)
             ));
 
             try {
@@ -557,7 +557,7 @@ class EditorNaskahController extends Controller
             $layouterUser->notify(new WorkflowNotification(
                 'Anda menerima tugas layout naskah.',
                 'Editor telah mengirim naskah untuk proses layout.',
-                route('layouter.naskah.show', $naskah->id_naskah)
+                route('layouter.naskah.show', $naskah->id_naskah, false)
             ));
         }
 

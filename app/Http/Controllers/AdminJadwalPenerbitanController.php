@@ -89,7 +89,7 @@ class AdminJadwalPenerbitanController extends Controller
             $penulisUser->notify(new WorkflowNotification(
                 'Jadwal terbit naskah telah ditentukan.',
                 'Admin menetapkan jadwal terbit '.$tanggalTerbit->translatedFormat('F Y').' untuk naskah Anda.',
-                route('penulis.riwayat-naskah.index')
+                route('penulis.riwayat-naskah.index', [], false)
             ));
         }
 
@@ -171,7 +171,7 @@ class AdminJadwalPenerbitanController extends Controller
             $penulisUser->notify(new WorkflowNotification(
                 'Jadwal penerbitan naskah telah diperbarui.',
                 'Admin memperbarui jadwal terbit '.$tanggalTerbit->translatedFormat('F Y').' untuk naskah Anda.',
-                route('penulis.riwayat-naskah.index')
+                route('penulis.riwayat-naskah.index', [], false)
             ));
         }
 

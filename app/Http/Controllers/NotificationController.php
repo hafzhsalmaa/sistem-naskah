@@ -27,7 +27,7 @@ class NotificationController extends Controller
             $notification->markAsRead();
         }
 
-        return redirect()->to($notification->data['url'] ?? route('dashboard'));
+        return redirect()->to(url($this->resolveNotificationPath($notification)));
     }
 
     public function markAsRead(Request $request, string $id): RedirectResponse
@@ -54,5 +54,33 @@ class NotificationController extends Controller
             ->notifications()
             ->where('id', $id)
             ->firstOrFail();
+    }
+
+    private function resolveNotificationPath(DatabaseNotification $notification): string
+    {
+        $url = $notification->data['url'] ?? route('dashboard', [], false);
+
+        if (! is_string($url) || trim($url) === '') {
+            return route('dashboard', [], false);
+        }
+
+        $url = trim($url);
+        $parts = parse_url($url);
+
+        if ($parts === false) {
+            return route('dashboard', [], false);
+        }
+
+        if (isset($parts['scheme']) || isset($parts['host'])) {
+            $path = $parts['path'] ?? '/';
+
+            if (! empty($parts['query'])) {
+                $path .= '?'.$parts['query'];
+            }
+
+            return $path;
+        }
+
+        return str_starts_with($url, '/') ? $url : '/'.ltrim($url, '/');
     }
 }

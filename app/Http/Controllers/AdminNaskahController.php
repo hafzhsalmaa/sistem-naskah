@@ -203,7 +203,7 @@ class AdminNaskahController extends Controller
             $editorUser->notify(new WorkflowNotification(
                 'Anda menerima tugas review naskah baru.',
                 'Admin telah mengirim naskah untuk Anda review.',
-                route('editor.naskah.show', $id)
+                route('editor.naskah.show', $id, false)
             ));
         }
 

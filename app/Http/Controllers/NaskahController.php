@@ -343,7 +343,7 @@ class NaskahController extends Controller
             $admin->notify(new WorkflowNotification(
                 'Naskah baru menunggu review.',
                 'Naskah "'.$naskah->judul.'" baru saja diunggah penulis dan menunggu review admin.',
-                route('admin.naskah.index')
+                route('admin.naskah.index', [], false)
             ));
         });
 
@@ -500,7 +500,7 @@ class NaskahController extends Controller
             $editorUser->notify(new WorkflowNotification(
                 'Penulis telah mengirim revisi naskah.',
                 'Penulis telah mengunggah revisi untuk naskah "'.$naskah->judul.'".',
-                route('editor.naskah.show', $naskah->getKey())
+                route('editor.naskah.show', $naskah->getKey(), false)
             ));
         }
 

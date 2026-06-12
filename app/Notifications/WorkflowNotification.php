@@ -26,7 +26,34 @@ class WorkflowNotification extends Notification
         return [
             'title' => $this->title,
             'message' => $this->message,
-            'url' => $this->url,
+            'url' => $this->normalizeUrl($this->url),
         ];
+    }
+
+    private function normalizeUrl(string $url): string
+    {
+        $url = trim($url);
+
+        if ($url === '') {
+            return route('dashboard', [], false);
+        }
+
+        $parts = parse_url($url);
+
+        if ($parts === false) {
+            return route('dashboard', [], false);
+        }
+
+        if (isset($parts['scheme']) || isset($parts['host'])) {
+            $path = $parts['path'] ?? '/';
+
+            if (! empty($parts['query'])) {
+                $path .= '?'.$parts['query'];
+            }
+
+            return $path;
+        }
+
+        return str_starts_with($url, '/') ? $url : '/'.ltrim($url, '/');
     }
 }
